@@ -12,11 +12,14 @@ public class Template {
     private String name;
     @Column(name = "code")
     private String code;
+    @Column(name = "language")
+    private String language;
 
     public Template(){}
-    public Template(String name, String code){
+    public Template(String name, String code, String language){
         this.name = name;
         this.code = code;
+        this.language = language;
     }
 
     public long getId() {
@@ -37,5 +40,13 @@ public class Template {
 
     public void setCode(String code) {
         this.code = code;
+    }
+
+    public String getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(String language) {
+        this.language = language;
     }
 }

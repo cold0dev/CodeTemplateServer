@@ -25,6 +25,10 @@ public class TemplateController {
         else if (template.getCode() == null){
             return new ResponseEntity<>("Code is empty",HttpStatus.BAD_REQUEST);
         }
+        else if (template.getLanguage() == null){
+            return new ResponseEntity<>("Code is empty",HttpStatus.BAD_REQUEST);
+        }
+        //TODO: strip whitespaces
 
         List<Template> templates = templateRepository.findAll();
 
@@ -70,7 +74,7 @@ public class TemplateController {
         return new ResponseEntity<>(templateRepository.findAll(),HttpStatus.OK);
     }
 
-    @GetMapping("/name")
+    @PostMapping("/name")
     public ResponseEntity<Template> getTemplateByName(@RequestBody Template template){
         if (template.getName() == null){
             return new ResponseEntity<>(null,HttpStatus.BAD_REQUEST);
@@ -119,6 +123,12 @@ public class TemplateController {
         templateRepository.delete(templateToUpdate);
         templateRepository.save(template);
 
+        return new ResponseEntity<>("Done",HttpStatus.OK);
+    }
+
+    @GetMapping("/removeall")
+    public ResponseEntity<String> removeAll(){
+        templateRepository.deleteAll();
         return new ResponseEntity<>("Done",HttpStatus.OK);
     }
 }
